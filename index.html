@@ -1,1 +1,16 @@
-Hello World
+---
+layout: default
+---
+
+{% for post in paginator.posts limit:1 %}
+<div class="article">
+    <!--
+    <div class="well">
+        <h1><a href="{{ site.baseurl}}{{ post.url }}">{{ post.title }}</a></h1>
+    </div>
+    -->
+    <div class="content">
+        {{ post.content }}
+    </div>
+</div>
+{% endfor %}
