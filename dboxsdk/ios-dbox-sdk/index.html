@@ -75,6 +75,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">DBox SDK <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
+                            <li >
+                                <a href="../about-dbox-sdk">About DBox</a>
+                            </li>
+                        
                             <li class="active">
                                 <a href=".">iOS DBox SDK</a>
                             </li>
@@ -131,25 +135,23 @@
     
         <li class="main active"><a href="#domob-dbox-sdk">Domob DBox SDK</a></li>
         
-            <li><a href="#_1">概述</a></li>
+            <li><a href="#_1">关于多宝屋</a></li>
         
-            <li><a href="#_2">基本概念</a></li>
-        
-            <li><a href="#_3">必要条件</a></li>
+            <li><a href="#_2">必要条件</a></li>
         
             <li><a href="#sdk">获取SDK</a></li>
         
-            <li><a href="#_4">配置通用参数</a></li>
+            <li><a href="#_3">配置通用参数</a></li>
         
-            <li><a href="#_5">目录结构和文件组织</a></li>
+            <li><a href="#_4">目录结构和文件组织</a></li>
         
             <li><a href="#sdk_1">SDK的使用方式和步骤</a></li>
         
             <li><a href="#sdk_2">SDK模版嵌入方式</a></li>
         
-            <li><a href="#_9">注意事项</a></li>
+            <li><a href="#_8">注意事项</a></li>
         
-            <li><a href="#_10">审核注意事项</a></li>
+            <li><a href="#_9">审核注意事项</a></li>
         
     
     </ul>
@@ -157,64 +159,18 @@
                 <div class="col-md-9" role="main">
 
 <h1 id="domob-dbox-sdk">Domob DBox SDK</h1>
-<h2 id="_1">概述</h2>
+<h2 id="_1">关于多宝屋</h2>
 <ul>
-<li>
-<p>多宝屋是多盟独创的全新广告产品。通过提供丰富稳定的精致生活相关服务，一方面为开发者带来稳定收入，另一方面为用户提供长期有价值的产品服务和体验。</p>
-</li>
-<li>
-<p>在多宝屋内，我们将提供长期稳定的服务，如话费充值、流量包、在线开卡、车险报价、彩票、团购等。与此同时，诸多知名品牌的各式活动也会不定期投放，如汽车试驾、试用装申请、理财产品、限时促销等。这些广告大都以灵活、美观的布局和多样化的模式呈现。由多盟专业的团队设计，保障精美度的同时极大提升广告效率。</p>
-</li>
+<li>请参见 <a href="../about-dbox-sdk">About DBox</a></li>
 </ul>
-<h2 id="_2">基本概念</h2>
-<ul>
-<li>多宝屋SDK：为媒体开发者提供统一和一致的接口来获取多宝屋资源，并提供简洁、高效的统计接口。</li>
-<li>频道：用来对容器做归类，如，多频道组成的卡片模式</li>
-</ul>
-<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel02.png" /> </center></p>
-<p>单一频道的平铺模式</p>
-<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
-<ul>
-<li>容器：用来陈列广告，有信息流、卡片、列表、webview四种样式</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>容器</th>
-<th>容器</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container01.png" /></td>
-<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container02.png" /></td>
-<td></td>
-</tr>
-<tr>
-<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container03.png" /></td>
-<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container04.png" /></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>PID：媒体发布者 ID，也叫 Publisher ID。媒体在多宝屋系统中的唯一标识。</li>
-<li>PPID：多宝屋位置 ID，也叫 Placement ID。媒体在系统中为多宝屋申请位置标识。</li>
-<li>统计报告：多宝屋目前按点击单价分成，未来还将支持多种结算方式，所以，各类统计报告是支持多种结算方式必不可少的数据。统计报告包括以下2种：<ul>
-<li>入口点击报告：entry click report。当点击触发展现多宝屋界面的按钮时，发送此报告。</li>
-<li>入口展现报告：entry impression report。当present多宝屋入口界面时发送此报告。表示进入多宝屋。</li>
-</ul>
-</li>
-</ul>
-<h2 id="_3">必要条件</h2>
+<h2 id="_2">必要条件</h2>
 <ul>
 <li><code>Xcode 6</code>或更高版本</li>
 <li><code>iOS 5.0</code>或更高版本</li>
 </ul>
 <h2 id="sdk">获取SDK</h2>
 <p>请前往多盟官网的<a href="http://www.domob.cn/developers/SDKdownload.htm">SDK下载页面</a>下载最新的SDK发行包。</p>
-<h2 id="_4">配置通用参数</h2>
+<h2 id="_3">配置通用参数</h2>
 <p>1 编译参数：多宝屋 SDK 同时支持 ARC/Non-ARC 编译选项。主要是在代码中使用 DOARCMarcos 来加以
 控制。</p>
 <pre><code>
@@ -248,7 +204,7 @@
 
 <p>2 链接多宝屋 DBoxSDK framework</p>
 <p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-framework.png" /> </center></p>
-<h2 id="_5">目录结构和文件组织</h2>
+<h2 id="_4">目录结构和文件组织</h2>
 <p>iOS 多宝屋SDK发行版本目录结构如下</p>
 <ul>
 <li>
@@ -321,7 +277,7 @@ Framework 中也包含了，</p>
 </table>
 <p>上面是 Demo 应用对模版的使用效果，当点击“加载数据”后，多宝屋模版入口即可弹出，并按照服务器后台设置的模式(如，平铺、卡片等)展现广告。
 模版的使用由一个重要的类DBoxManager提供接口，目前DBoxManager提供两种使用方式：</p>
-<h3 id="_6">方式一：预加载模式</h3>
+<h3 id="_5">方式一：预加载模式</h3>
 <p>下面就Demo为例，详细说明模版的使用步骤</p>
 <p>1   准备好申请的开发者ID(Publisher ID)和多宝屋的广告位 ID(Placement ID)，如，Demo中是将此ID放入在 AppDelegate中，</p>
 <pre><code>#import &lt;UIKit/UIKit.h&gt;
@@ -420,8 +376,8 @@ Framework 中也包含了，</p>
 
 <p>获取获取成功后，此时所有的数据已经预加载完毕，那么我们可以根据需要，</p>
 <ul>
-<li>立刻调用；</li>
-<li>也可以在其它方便的时候调用</li>
+<li><code>立刻调用</code>；</li>
+<li><code>也可以在其它方便的时候调用</code></li>
 </ul>
 <p>[dboxManager presentEntryController]来展示入口界面。</p>
 <p>6   在入口界面展示后，发送入口展现报告，</p>
@@ -499,7 +455,7 @@ Framework 中也包含了，</p>
 }
 </code></pre>
 
-<h3 id="_7">方式二：直接展示模式</h3>
+<h3 id="_6">方式二：直接展示模式</h3>
 <p>1   准备好申请的开发者ID(Publisher ID)和多宝屋的广告位 ID(Placement ID)，如，Demo中是将此ID放入在 AppDelegate中，</p>
 <pre><code>#import &lt;UIKit/UIKit.h&gt;
 
@@ -592,7 +548,7 @@ Framework 中也包含了，</p>
 }
 </code></pre>
 
-<h3 id="_8">备注</h3>
+<h3 id="_7">备注</h3>
 <p>1   DBoxManager支持多个广告位，也就是说，我们可以用不同的广告位ID(Placement ID)来实例化多个DBoxManager；</p>
 <p>2   通过后台设置，我们也可以使不同广告位ID的DBoxManager展示不同模式的入口界面，即平铺模式和卡片模式；</p>
 <p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-flat-card-entry.png" /> </center></p>
@@ -690,7 +646,7 @@ Framework 中也包含了，</p>
 </tbody>
 </table>
 <p>具体的使用请参见SDK所附带的demo程序。</p>
-<h2 id="_9">注意事项</h2>
+<h2 id="_8">注意事项</h2>
 <p>多宝屋 iOS SDK集成注意事项：</p>
 <ol>
 <li>
@@ -704,7 +660,7 @@ Framework 中也包含了，</p>
 </li>
 </ol>
 <p>请您在集成完毕后务必逐一核查以上各项。保证各项的正确性，以免影响收入。</p>
-<h2 id="_10">审核注意事项</h2>
+<h2 id="_9">审核注意事项</h2>
 <p>1 由于多宝屋 SDK 获取了 IDFA，那么在提交 App Store 审核时，请按照下面的截图选择 IDFA 相关的选项。</p>
 <p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-idfa.png" /> </center></p>
 <p>2 若以上选择仍然不能通过审核，</p>

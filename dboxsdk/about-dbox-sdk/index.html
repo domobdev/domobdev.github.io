@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../../../../favicon.ico">
         
 
-        <title>如何获得PublisherId和PlacementID - Domob Developer Guides</title>
+        <title>About DBox - Domob Developer Guides</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -71,20 +71,20 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">DBox SDK <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
-                            <li >
-                                <a href="../../dboxsdk/about-dbox-sdk">About DBox</a>
+                            <li class="active">
+                                <a href=".">About DBox</a>
                             </li>
                         
                             <li >
-                                <a href="../../dboxsdk/ios-dbox-sdk">iOS DBox SDK</a>
+                                <a href="../ios-dbox-sdk">iOS DBox SDK</a>
                             </li>
                         
                             <li >
-                                <a href="../../dboxsdk/android-dbox-sdk">Android DBox SDK</a>
+                                <a href="../android-dbox-sdk">Android DBox SDK</a>
                             </li>
                         
                         </ul>
@@ -92,12 +92,12 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">如何... <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
-                            <li class="active">
-                                <a href=".">如何获得PublisherId和PlacementID</a>
+                            <li >
+                                <a href="../../howto/how-to-get-ids">如何获得PublisherId和PlacementID</a>
                             </li>
                         
                         </ul>
@@ -133,17 +133,68 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#publisher-idplacement-id">如何获取Publisher ID和Placement ID</a></li>
+        <li class="main active"><a href="#domob-dbox-sdk">Domob DBox SDK</a></li>
+        
+            <li><a href="#_1">概述</a></li>
+        
+            <li><a href="#_2">基本概念</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="publisher-idplacement-id">如何获取Publisher ID和Placement ID</h1>
-<p>如果想要在App中使用多盟的广告，首先需要成为多盟开发者，然后获得一个Publisher ID和相应的Placement ID。</p>
-<p>请登陆<a href="http://www.domob.cn/help/index.htm?t=tab1">多盟官网帮助中心</a>，获取更多关于如何成为多盟开发者以及新建应用的信息。</p>
-<p>当新建应用后即可获得一个Publisher ID，然后需要在应用中添加广告位，即可获得Placement ID，详情请查看 <a href="http://www.domob.cn/news/announcement/20130503/503.htm">广告位功能升级公告</a>。</p>
+<h1 id="domob-dbox-sdk">Domob DBox SDK</h1>
+<h2 id="_1">概述</h2>
+<ul>
+<li>
+<p>多宝屋是多盟独创的全新广告产品。通过提供丰富稳定的精致生活相关服务，一方面为开发者带来稳定收入，另一方面为用户提供长期有价值的产品服务和体验。</p>
+</li>
+<li>
+<p>在多宝屋内，我们将提供长期稳定的服务，如话费充值、流量包、在线开卡、车险报价、彩票、团购等。与此同时，诸多知名品牌的各式活动也会不定期投放，如汽车试驾、试用装申请、理财产品、限时促销等。这些广告大都以灵活、美观的布局和多样化的模式呈现。由多盟专业的团队设计，保障精美度的同时极大提升广告效率。</p>
+</li>
+</ul>
+<h2 id="_2">基本概念</h2>
+<ul>
+<li>多宝屋SDK：为媒体开发者提供统一和一致的接口来获取多宝屋资源，并提供简洁、高效的统计接口。</li>
+<li>频道：用来对容器做归类，如，多频道组成的卡片模式</li>
+</ul>
+<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel02.png" /> </center></p>
+<p>单一频道的平铺模式</p>
+<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
+<ul>
+<li>容器：用来陈列广告，有信息流、卡片、列表、webview四种样式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>容器</th>
+<th>容器</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container01.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container02.png" /></td>
+<td></td>
+</tr>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container03.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container04.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>PID：媒体发布者 ID，也叫 Publisher ID。媒体在多宝屋系统中的唯一标识。</li>
+<li>PPID：多宝屋位置 ID，也叫 Placement ID。媒体在系统中为多宝屋申请位置标识。</li>
+<li>统计报告：多宝屋目前按点击单价分成，未来还将支持多种结算方式，所以，各类统计报告是支持多种结算方式必不可少的数据。统计报告包括以下2种：<ul>
+<li>入口点击报告：entry click report。当点击触发展现多宝屋界面的按钮时，发送此报告。</li>
+<li>入口展现报告：entry impression report。当present多宝屋入口界面时发送此报告。表示进入多宝屋。</li>
+</ul>
+</li>
+</ul>
 </div>
             
         </div>
