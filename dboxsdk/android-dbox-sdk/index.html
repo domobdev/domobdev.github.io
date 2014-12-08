@@ -135,12 +135,209 @@
     
         <li class="main active"><a href="#domob-android-dbox-sdk">Domob Android DBox SDK</a></li>
         
+            <li><a href="#_1">关于多宝屋</a></li>
+        
+            <li><a href="#_2">必要条件</a></li>
+        
+            <li><a href="#sdk">获取SDK</a></li>
+        
+            <li><a href="#_3">配置资源及权限</a></li>
+        
+            <li><a href="#sdk_1">SDK的使用方式和步骤</a></li>
+        
+            <li><a href="#sdk_2">SDK模版嵌入方式</a></li>
+        
+            <li><a href="#_5">注意事项</a></li>
+        
+            <li><a href="#_6">审核注意事项</a></li>
+        
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="domob-android-dbox-sdk">Domob Android DBox SDK</h1>
+<h2 id="_1">关于多宝屋</h2>
+<ul>
+<li>请参见 <a href="../about-dbox-sdk">About DBox</a></li>
+</ul>
+<h2 id="_2">必要条件</h2>
+<ul>
+<li><code>Android sdk 2.2</code>或更高版本</li>
+</ul>
+<h2 id="sdk">获取SDK</h2>
+<p>请发送邮件到 <a href="mailto:support-dbox@domob.cn">support-dbox@domob.cn</a> 获取最新的 Android DBox SDK 发行包。</p>
+<h2 id="_3">配置资源及权限</h2>
+<p>1 多宝屋内含丰富的界面交互，并自带两套模版，这些资源('res/'目录下)需要拷贝到宿主项目，与宿主项目融合。具体包括图片资源、布局资源、字符串资源、颜色资源、样式主题资源等。</p>
+<p>2 配置应用权限，这些权限主要用于接入网络、标示设备、定位用户等。若原程序已添加，无需重复添加，若程序尚未包含，请添加以下权限</p>
+<pre><code>&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_COARSE_LOCATION&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+&lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
+</code></pre>
+
+<p>3 拷贝libs下面的jar包dbox_sdk.jar到项目中，并且 Add to Build Path。</p>
+<h2 id="sdk_1">SDK的使用方式和步骤</h2>
+<p>开发者可以使用 SDK 提供的模版 UI 和 Control 来展示多宝屋广告，可以节省一些界面开发的时间。效果如下：</p>
+<table>
+<thead>
+<tr>
+<th>入口</th>
+<th>主界面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-entry.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-main.png" /></td>
+</tr>
+</tbody>
+</table>
+<p>上面是 Demo 应用对模版的使用效果，当点击“加载数据”后，多宝屋模版入口即可弹出，并按照服务器后台设置的模式(如，平铺、卡片等)展现广告。</p>
+<p>下面就Demo为例，详细说明模版的使用步骤</p>
+<p>1   准备好申请的开发者ID(Publisher ID)和多宝屋的广告位 ID(Placement ID)。</p>
+<pre><code>public final static String publisherID = &quot;56OJw+rouN8xags3p9&quot;;
+public final static String placementID = &quot;16TLuFnvAp2psNU06G25s9Si&quot;;
+</code></pre>
+
+<p>2   声明 DBoxManager，并设置DBoxViewListener监听。应用会在关键时刻回调。</p>
+<pre><code>// 初始化DBoxManager对象
+mDBoxManager = new DBoxManager(mContext, publisherID,placementID);
+//设置关键时刻回调
+mDBoxManager.setDBoxViewListener(new DBoxViewListener() {
+
+    @Override
+    public void onSuccessReceiveData(String entranceRemind) {
+        // 当获取到数据时回调，entranceRemind参数为入口提醒标示，
+
+    }
+
+    @Override
+    public void onFailReceiveData(String errorInfo) {
+        // 当获取数据失败时回调，errorInfo为错误原因
+
+    }
+
+    @Override
+    public void onDBoxViewClosed() {
+        // 当界面被关闭时回调
+
+    }
+
+    @Override
+    public void onLeaveApplication() {
+        // 当离开宿主应用时，如打开外置浏览器，调出拨号盘等
+
+    }
+
+    @Override
+    public void onDBoxViewPresent() {
+        // 当开始展现多宝屋界面时
+
+    }
+});
+</code></pre>
+
+<p>3   预先获取广告数据(不展现界面)，若不需要预先加载数据，可忽略此歩。可以在你App界面启动阶段获取，也可以在某个按钮点击后获取。</p>
+<pre><code>// 预加载，至于预先加载的时机，建议应用启动后，或者入口展现后
+mDBoxManager.preLoadData();
+</code></pre>
+
+<p>4   展现多宝屋页面,直接调用pressentWall()方法即可。</p>
+<pre><code>//展现多宝屋界面
+mDBoxManager.presentWall();
+</code></pre>
+
+<p>5   在入口展现时，发送入口展现报告。</p>
+<pre><code>// 入口展现报告，切记一定要放在多宝屋“入口”真正展现的时候
+mDBoxManager.doEntryReports(EntryReportType.ENTRY_IMP);
+</code></pre>
+
+<p>6   在“入口”点击时，发送入口点击报告。</p>
+<pre><code>// 入口点击报告
+mDBoxManager.doEntryReports(EntryReportType.ENTRY_CLK);
+</code></pre>
+
+<h3 id="_4">备注</h3>
+<p>1   DBoxManager支持多个广告位，也就是说，我们可以用不同的广告位ID(Placement ID)来实例化多个DBoxManager；</p>
+<p>2   通过后台设置，我们也可以使不同广告位ID的DBoxManager展示不同模式的入口界面，即平铺模式和卡片模式；</p>
+<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-flat-card-entry.png" /> </center></p>
+<h2 id="sdk_2">SDK模版嵌入方式</h2>
+<p>SDK 附带的demo展示了三种SDK模版嵌入方式，分别是：</p>
+<p>1   固定&amp;弹出
+最常用也是最普通的方式，如，设定一个界面上的按钮作为多宝屋的入口，那么当点击某个按钮时，入口界面即弹出；</p>
+<table>
+<thead>
+<tr>
+<th>固定&amp;弹出</th>
+<th>主界面</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-entry.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-main.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>2   小把手&amp;弹出
+为节省界面空间，也可以用一个侧边把手来作为入口，当点击后，弹出入口界面。</p>
+<table>
+<thead>
+<tr>
+<th>小把手&amp;弹出</th>
+<th>主界面</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-entry-handle.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-main.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>3   嵌入式
+将多宝屋的界面融入您的app之中，使其自然成为app的一部分，</p>
+<table>
+<thead>
+<tr>
+<th>嵌入式</th>
+<th>主界面</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-entry-embed.png" /></td>
+<td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-demo-main-embed.png" /></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>具体的使用请参见SDK所附带的demo程序。</p>
+<h2 id="_5">注意事项</h2>
+<p>多宝屋 Android SDK集成注意事项：</p>
+<ol>
+<li>
+<p>Publisher ID 和 Placement ID 一定要用媒体自己申请的，不要用多宝屋Demo中的默认 ID；</p>
+</li>
+<li>
+<p>发送入口点击报告</p>
+</li>
+<li>
+<p>发送入口展现报告：</p>
+</li>
+</ol>
+<p>请您在集成完毕后务必逐一核查以上各项。保证各项的正确性，以免影响收入。</p>
+<h2 id="_6">审核注意事项</h2>
+<p>如有任何问题，请直接联系客服 <a href="mailto:support-dbox@domob.cn">support-dbox@domob.cn</a>。</p>
 </div>
             
         </div>

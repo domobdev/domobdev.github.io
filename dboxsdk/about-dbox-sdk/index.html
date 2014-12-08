@@ -157,19 +157,20 @@
 <h2 id="_2">基本概念</h2>
 <ul>
 <li>多宝屋SDK：为媒体开发者提供统一和一致的接口来获取多宝屋资源，并提供简洁、高效的统计接口。</li>
-<li>频道：用来对容器做归类，如，多频道组成的卡片模式</li>
+<li>频道：用来对容器做归类。目前频道有卡片(card)模式和平铺(flat)模式两种布局方式。如，</li>
 </ul>
-<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel02.png" /> </center></p>
-<p>单一频道的平铺模式</p>
-<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
+<p><center><b>多频道组成的卡片模式</b></center>
+<center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel02.png" /> </center>
+<center><b>单一频道的平铺模式</b></center>
+<center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
 <ul>
-<li>容器：用来陈列广告，有信息流、卡片、列表、webview四种样式</li>
+<li>容器：用来陈列广告。目前有信息流(feed)、卡片(card)、列表(list)和网页(web) 四种样式。</li>
 </ul>
 <table>
 <thead>
 <tr>
-<th>容器</th>
-<th>容器</th>
+<th>信息流(feed)</th>
+<th>列表(list)</th>
 <th></th>
 </tr>
 </thead>
@@ -179,6 +180,17 @@
 <td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container02.png" /></td>
 <td></td>
 </tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>卡片(card)</th>
+<th>网页(web)</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container03.png" /></td>
 <td><img alt="" src="../../assets/dboxsdk/ios-dboxsdk-container04.png" /></td>
@@ -189,9 +201,9 @@
 <ul>
 <li>PID：媒体发布者 ID，也叫 Publisher ID。媒体在多宝屋系统中的唯一标识。</li>
 <li>PPID：多宝屋位置 ID，也叫 Placement ID。媒体在系统中为多宝屋申请位置标识。</li>
-<li>统计报告：多宝屋目前按点击单价分成，未来还将支持多种结算方式，所以，各类统计报告是支持多种结算方式必不可少的数据。统计报告包括以下2种：<ul>
-<li>入口点击报告：entry click report。当点击触发展现多宝屋界面的按钮时，发送此报告。</li>
-<li>入口展现报告：entry impression report。当present多宝屋入口界面时发送此报告。表示进入多宝屋。</li>
+<li>统计报告：多宝屋目前按点击单价分成，未来还将支持多种结算方式，所以，各类统计报告是支持多种结算方式必不可少的数据。目前需要开发者了解和发送的统计报告包括以下 2 类：<ul>
+<li>入口点击报告：entry click report。当点击触发展现多宝屋界面的按钮时发送此报告，表示用户点击了多宝屋入口。</li>
+<li>入口展现报告：entry impression report。当present多宝屋入口界面时发送此报告，表示进入多宝屋。</li>
 </ul>
 </li>
 </ul>
