@@ -168,11 +168,12 @@
 </ul>
 <h2 id="_2">基本概念</h2>
 <ul>
-<li>多宝屋SDK：为媒体开发者提供统一和一致的接口来获取多宝屋资源，并提供简洁、高效的统计接口。
-频道：用来对容器做归类</li>
+<li>多宝屋SDK：为媒体开发者提供统一和一致的接口来获取多宝屋资源，并提供简洁、高效的统计接口。</li>
+<li>频道：用来对容器做归类，如，多频道组成的卡片模式</li>
 </ul>
-<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
 <p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel02.png" /> </center></p>
+<p>单一频道的平铺模式</p>
+<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-channel01.png" /> </center></p>
 <ul>
 <li>容器：用来陈列广告，有信息流、卡片、列表、webview四种样式</li>
 </ul>
@@ -417,10 +418,12 @@ Framework 中也包含了，</p>
 }
 </code></pre>
 
-<p>获取获取成功后，此时所有的数据已经预加载完毕，那么我们可以根据需要，
-•   立刻调用；
-•   也可以在其它方便的时候调用
-[dboxManager presentEntryController]来展示入口界面。</p>
+<p>获取获取成功后，此时所有的数据已经预加载完毕，那么我们可以根据需要，</p>
+<ul>
+<li>立刻调用；</li>
+<li>也可以在其它方便的时候调用</li>
+</ul>
+<p>[dboxManager presentEntryController]来展示入口界面。</p>
 <p>6   在入口界面展示后，发送入口展现报告，</p>
 <pre><code>- (void)doEntryImpression
 {
@@ -590,11 +593,10 @@ Framework 中也包含了，</p>
 </code></pre>
 
 <h3 id="_8">备注</h3>
-<ol>
-<li>DBoxManager支持多个广告位，也就是说，我们可以用不同的广告位ID(Placement ID)来实例化多个DBoxManager；</li>
-<li>通过后台设置，我们也可以使不同广告位ID的DBoxManager展示不同模式的入口界面。</li>
-<li>DBoxManager 也提供了三个接口供用户修改导航栏颜色，分别是，</li>
-</ol>
+<p>1   DBoxManager支持多个广告位，也就是说，我们可以用不同的广告位ID(Placement ID)来实例化多个DBoxManager；</p>
+<p>2   通过后台设置，我们也可以使不同广告位ID的DBoxManager展示不同模式的入口界面，即平铺模式和卡片模式；</p>
+<p><center> <img alt="" src="../../assets/dboxsdk/ios-dboxsdk-flat-card-entry.png" /> </center></p>
+<p>3   DBoxManager 也提供了三个接口供用户修改导航栏颜色，分别是，</p>
 <pre><code>//
 //  设置导航栏颜色。
 //  @param barTintColor 颜色
