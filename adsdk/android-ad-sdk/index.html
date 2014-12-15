@@ -72,6 +72,27 @@
                 
                 
                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Native Ad SDK <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../nativesdk/native-default">Native Ad Information</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../nativesdk/ios-native-ad-sdk">iOS Native Ad SDK</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../nativesdk/android-native-ad-sdk">Android Native Ad SDK</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">DBox SDK <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -152,8 +173,6 @@
             <li><a href="#feeds-ad">使用信息流广告（Feeds Ad）</a></li>
         
             <li><a href="#splash-ad">使用开屏广告（Splash Ad）</a></li>
-        
-            <li><a href="#native-ad">使用本地原生广告（Native Ad）</a></li>
         
             <li><a href="#_7">获取示例</a></li>
         
@@ -723,115 +742,6 @@ public void onConfigurationChanged(Configuration configuration) {
         finish();
     }
 }
-</code></pre>
-
-<h2 id="native-ad">使用本地原生广告（Native Ad）</h2>
-<p>Native广告模式是向开发者提供广告数据,由开发者手动将广告数据布局到自己应用的界面的广告模式。</p>
-<p>本地原生广告的使用，需要以下几步：</p>
-<p>1.实现<code>NativeAdDataLoadListener</code>监听。</p>
-<pre><code>NativeAdDataLoadListener nativeAdDataLoadListener = new NativeAdDataLoadListener() {
-
-            @Override
-            public void onLoadSuccess(final NativeAdData nativeAdData) {
-                // 广告标题
-                tv_title.setText(nativeAdData.title);
-                // 广告描述 字数限制是33-80字
-                tv_description.setText(nativeAdData.description);
-                // app 星级 , 范围 : 0-100
-                tv_ratings.setText(nativeAdData.appRating+&quot;&quot;);
-                // 广告简介 字数限制是8-32字
-                tv_brief.setText(nativeAdData.brief);
-                // app 包大小, 单位为Byte
-                tv_size.setText(nativeAdData.appSize+&quot;&quot;);
-                // 广告事件按钮的提示文字
-                bt.setText(nativeAdData.clickActionText);
-                // app 下载数
-                tv_downloads.setText(nativeAdData.appDownloads+&quot;&quot;);
-                // 广告icon
-                if (nativeAdData.iconInfo != null) {
-                    // 图片URL
-                    String iconUrl = nativeAdData.iconInfo.imageUrl;
-                }
-                // 广告大图
-                if (nativeAdData.mainInfo != null) {
-                    // 图片URL
-                    String mainUrl = nativeAdData.mainInfo.imageUrl;
-                }
-            }
-
-            @Override
-            public void onLoadFailer(NativeAdErrorCode errorMessage) {
-                mLogger.debugLog(&quot;onNativeFail :&quot; + errorMessage.toString());
-            }
-
-        };
-</code></pre>
-
-<p>2.使用您从多盟官网获得的Publisher ID、Placement ID、<code>NativeAdDataLoadListener</code>的实例以及当前的Activity，来初始化一个<code>NativeAd</code>的实例。</p>
-<pre><code>NativeAd nativeAd = new NativeAd(this, MainActivity.mPublisherID, MainActivity.mNativePPID, nativeAdDataLoadListener);
-</code></pre>
-
-<p>3.在合适的时候，调用<code>loadNativeAd</code>方法请求广告。</p>
-<pre><code>nativeAd.loadNativeAd();
-</code></pre>
-
-<p>3.在<code>NativeAdDataLoadListener</code>的<code>onLoadSuccess</code>回调方法，获取<code>NativeAdData</code></p>
-<pre><code>@Override
-            public void onLoadSuccess(final NativeAdData nativeAdData) {
-                // 广告标题
-                tv_title.setText(nativeAdData.title);
-                // 广告描述 字数限制是33-80字
-                tv_description.setText(nativeAdData.description);
-                // app 星级 , 范围 : 0-100
-                tv_ratings.setText(nativeAdData.appRating+&quot;&quot;);
-                // 广告简介 字数限制是8-32字
-                tv_brief.setText(nativeAdData.brief);
-                // app 包大小, 单位为Byte
-                tv_size.setText(nativeAdData.appSize+&quot;&quot;);
-                // 广告事件按钮的提示文字
-                bt.setText(nativeAdData.clickActionText);
-                // app 下载数
-                tv_downloads.setText(nativeAdData.appDownloads+&quot;&quot;);
-                // 广告icon
-                if (nativeAdData.iconInfo != null) {
-                    // 图片URL
-                    String iconUrl = nativeAdData.iconInfo.imageUrl;
-                }
-                // 广告大图
-                if (nativeAdData.mainInfo != null) {
-                    // 图片URL
-                    String mainUrl = nativeAdData.mainInfo.imageUrl;
-                }
-            }
-</code></pre>
-
-<p>4.将<code>NativeAdData</code>的数据展现到屏幕时，务必调用<code>trackImpression</code>方法，发送展现报告</p>
-<pre><code>nativeAd.trackImpression();
-</code></pre>
-
-<p>5.对于广告内的点击事件，需要调用<code>handleAction</code>方法处理</p>
-<pre><code>bt.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (nativeAd != null) {
-                    // 处理点击事件
-                    nativeAd.handleAction();
-                } else {
-                    Toast.makeText(getApplicationContext(), &quot;NativeData is null&quot;, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-</code></pre>
-
-<p>6.清除占用资源，在Activity的onDestroy回调<code>NativeAd</code>的<code>destroy</code>方法</p>
-<pre><code>@Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (nativeAd != null) {
-            nativeAd.destroy();
-            nativeAd = null;
-        }
-    }
 </code></pre>
 
 <h2 id="_7">获取示例</h2>

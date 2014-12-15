@@ -10,7 +10,7 @@
         <link rel="shortcut icon" href="../../../../favicon.ico">
         
 
-        <title>如何获得PublisherId和PlacementID - Domob Developer Guides</title>
+        <title>Native Ad Information - Domob Developer Guides</title>
 
         <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../../css/font-awesome-4.0.3.css" rel="stylesheet">
@@ -71,20 +71,20 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Native Ad SDK <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
-                            <li >
-                                <a href="../../nativesdk/native-default">Native Ad Information</a>
+                            <li class="active">
+                                <a href=".">Native Ad Information</a>
                             </li>
                         
                             <li >
-                                <a href="../../nativesdk/ios-native-ad-sdk">iOS Native Ad SDK</a>
+                                <a href="../ios-native-ad-sdk">iOS Native Ad SDK</a>
                             </li>
                         
                             <li >
-                                <a href="../../nativesdk/android-native-ad-sdk">Android Native Ad SDK</a>
+                                <a href="../android-native-ad-sdk">Android Native Ad SDK</a>
                             </li>
                         
                         </ul>
@@ -113,12 +113,12 @@
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">如何... <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
-                            <li class="active">
-                                <a href=".">如何获得PublisherId和PlacementID</a>
+                            <li >
+                                <a href="../../howto/how-to-get-ids">如何获得PublisherId和PlacementID</a>
                             </li>
                         
                         </ul>
@@ -154,17 +154,227 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#publisher-idplacement-id">如何获取Publisher ID和Placement ID</a></li>
+        <li class="main active"><a href="#native-ad-information">Native Ad Information</a></li>
+        
+            <li><a href="#native-ad">Native Ad 素材设置说明</a></li>
+        
+            <li><a href="#native-ad_1">Native Ad 素材选项说明</a></li>
         
     
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="publisher-idplacement-id">如何获取Publisher ID和Placement ID</h1>
-<p>如果想要在App中使用多盟的广告，首先需要成为多盟开发者，然后获得一个Publisher ID和相应的Placement ID。</p>
-<p>请登陆<a href="http://www.domob.cn/help/index.htm?t=tab1">多盟官网帮助中心</a>，获取更多关于如何成为多盟开发者以及新建应用的信息。</p>
-<p>当新建应用后即可获得一个Publisher ID，然后需要在应用中添加广告位，即可获得Placement ID，详情请查看 <a href="http://www.domob.cn/news/announcement/20130503/503.htm">广告位功能升级公告</a>。</p>
+<h1 id="native-ad-information">Native Ad Information</h1>
+<h2 id="native-ad">Native Ad 素材设置说明</h2>
+<p>Native Ad 素材需要在<a href="http://www.domob.cn/">Domob开发者后台</a>设置，同时罗列的各项素材至少选择一类素材,一旦创建不可修改。</p>
+<h2 id="native-ad_1">Native Ad 素材选项说明</h2>
+<table>
+<thead>
+<tr>
+<th align="left">ICON的图片取值范围</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">175×175</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">150×150</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">125×125</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">120×120</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">90×90</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">75×75</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">标题取值范围</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">2-14字</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">简介取值范围</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">8-16字</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">17-32字</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">详情取值范围</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">33-48字</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">49-80字</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="left">Media取值范围</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">1136×640</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">960×720</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">900×750</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">758×480</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">720×540</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">644×280</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">640×1130</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">600×600</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">600×500</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">568×320</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">480×758</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">480×360</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">450×375</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">400×400</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">380×240</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">360×270</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">320×568</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">300×300</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">300×250</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">284×160</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">240×380</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">240×180</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">225×188</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">200×200</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">160×284</td>
+<td></td>
+</tr>
+<tr>
+<td align="left">150×150</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="_1">点击按钮名称</h4>
+<p>返回1-4个字</p>
+<h4 id="_2">星级</h4>
+<p>返回数值为[0,100],请开发者自行计算要对 应显示的星级,示例:只想展示 1-5 星,允许小数,若返回值为 25, 则 25/20 = 1.25 , 则界面显示1.25星</p>
+<h4 id="_3">安装包大小</h4>
+<p>返回数值为[0,+∞),单位为Byte</p>
+<h4 id="_4">下载次数</h4>
+<p>返回值为[0, +∞)</p>
 </div>
             
         </div>

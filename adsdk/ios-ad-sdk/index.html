@@ -72,6 +72,27 @@
                 
                 
                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Native Ad SDK <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            <li >
+                                <a href="../../nativesdk/native-default">Native Ad Information</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../nativesdk/ios-native-ad-sdk">iOS Native Ad SDK</a>
+                            </li>
+                        
+                            <li >
+                                <a href="../../nativesdk/android-native-ad-sdk">Android Native Ad SDK</a>
+                            </li>
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">DBox SDK <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -152,8 +173,6 @@
             <li><a href="#feeds-ad">使用信息流广告（Feeds Ad）</a></li>
         
             <li><a href="#splash-ad">使用开屏广告（Splash Ad）</a></li>
-        
-            <li><a href="#native-ad">使用原生广告（Native Ad）</a></li>
         
             <li><a href="#_8">获取示例</a></li>
         
@@ -765,9 +784,10 @@ _dmAdView.frame = CGRectMake(0, 20, DOMOB_AD_SIZE_320x50.width,DOMOB_AD_SIZE_320
     self.window.rootViewController = self.firstViewController;
     [self.window makeKeyAndVisible];
 
-
+    //开发者自主选择实时开屏或者缓存开屏
     BOOL isRealTimeSplash = NO;
 
+    //呈现实时开屏广告
     if (isRealTimeSplash) {
         _rtSplashAd =[[DMRTSplashAdController alloc]initWithPublisherId:DOMOB_PUBLISHERID
                                                             placementId:DOMOB_RTSPLASHPLACEMENTID
@@ -783,7 +803,7 @@ _dmAdView.frame = CGRectMake(0, 20, DOMOB_AD_SIZE_320x50.width,DOMOB_AD_SIZE_320
 
 
     }else{
-        // 呈现开屏广告
+        // 呈现缓存开屏广告
         _splashAd = [[DMSplashAdController alloc]initWithPublisherId:DOMOB_PUBLISHERID                                                                                placementId:DOMOB_SPLASHPLACEMENTID
                                                                 size:CGSizeMake(0, 0)
                                                               offset:0
@@ -839,147 +859,6 @@ _dmAdView.frame = CGRectMake(0, 20, DOMOB_AD_SIZE_320x50.width,DOMOB_AD_SIZE_320
 @end
 </code></pre>
 
-<h2 id="native-ad">使用原生广告（Native Ad）</h2>
-<p>若要在应用中添加一个原生广告（Native Ad），只需要简单的几步：</p>
-<ol>
-<li>导入<code>DMNativeAd.h</code>头文件。</li>
-<li>声明一个<code>DMNativeAd</code>的实例。</li>
-<li>使您的UIViewController实现<code>DMNativeAdDelegate</code>协议。</li>
-<li>在您的UIViewController的m文件中，使用您从多盟官网获得的Publisher ID和 Placement ID还有<code>rootViewController</code>以及<code>delegate</code>来初始化DMNativeAd。</li>
-<li>在合适的时候,调用loadAd方法,来加载Native广告。</li>
-<li>从Success的回调中获取提供的广告信息的数据模型。</li>
-<li>将广告信息展现到界面,并调用 trackImpression 方法,发送展现报告。</li>
-<li>对于广告提供的点击事件需要调用 processClickAction 方法,处理该事件。</li>
-</ol>
-<p>下面的代码片段，简单描述了这个过程：</p>
-<pre><code>@interface NativeAdViewController : UIViewController&lt;DMNativeAdDelegate&gt;
-
-@property (nonatomic, retain) DMNativeAd *nativeAd;
-
-@end
-</code></pre>
-
-<pre><code>@implementation NativeAdViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self)
-    {
-    }
-    return self;
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // 生成Native实例 并 请求广告
-    UIViewController *controller = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-
-    _nativeAd = [[DMNativeAd alloc] initWithPublisherId:DOMOB_PUBLISHERID
-                                            placementId:DOMOB_PLACEMENTID
-                                     rootViewController:controller
-                                               delegate:self];
-    [_nativeAd loadAd];
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-//加载下一条广告 和 加载广告都是调用同一个方法
-- (IBAction)nextNativeAd:(id)sender {
-    [_nativeAd loadAd];
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-
-     _nativeAd.delegate = nil;  // 释放Native广告对象前，请先将其delegate设置为nil
-    [_nativeAd release];        // 释放Native广告对象
-     _native = nil;
-
-} 
-
-#pragma mark -
-#pragma mark NativeAdDelegate
-
-- (void)dmNativeAdSuccessToLoadAd:(DMNativeAdModel *)adDataModel
-{
-//获取成功回调带过来的数据模型并渲染到界面 
-    [self.nativeTitle setText:adDataModel.adTitle];
-    [self.nativeBrief setText:adDataModel.adBrief];
-    [self.nativeDescription setText:adDataModel.adDescription];
-    [self.linkBtn setTitle:adDataModel.adActionText forState:UIControlStateNormal];
-    [self.imageIcon setImageURL:[NSURL URLWithString:adDataModel.adIcon.adUrl]];
-    [self.imageMedia setImageURL:[NSURL URLWithString:adDataModel.adMedia.adUrl]];
-
-    //星级 对应程序中 adRatings 字段 返回数值为[0,100],请开发者自行计算要对 应显示的星级,示例:只想展示 1-5 星,允许小数,若返回值为 25, 则 25/20 = 1.25 , 则界面显示 1.25 星
-    [self.ratingLabel setText:[NSString stringWithFormat:@&quot;%lu&quot;,(unsigned long)adDataModel.adRatings]];
-
-    //安装包大小对应程序中adSize字段返回数值为[0,+∞),单位为Byte
-    [self.sizeLabel setText:[NSString stringWithFormat:@&quot;%lu&quot;,(unsigned long)adDataModel.adSize]];
-
-    //下载次数 对应程序中 adDownloads 字段返回值为[0, +∞)
-    [self.downloadLabel setText:[NSString stringWithFormat:@&quot;%lu&quot;,(unsigned long)adDataModel.adDownloads]];
-
-}
-
-- (void)dmNativeAdFailToLoadAdWithError:(NSError *)error
-{
-     NSLog(@&quot;&lt;DMNative Ad error = %@&gt;&quot;,error);
-}
-
-
-</code></pre>
-
-<h6 id="dmnativead">关于DMNativeAd的释放</h6>
-<p>在这里强烈建议您，在释放DMNativeAd之前，将DMNativeAd的属性<code>delegate</code>和<code>rootViewController</code>设置为nil。如下例：</p>
-<pre><code>- (void)viewDidUnload
-{
-    [super viewDidUnload];
-
-     _nativeAd.delegate = nil;  // 释放Native广告对象前，请先将其delegate设置为nil
-    [_nativeAd release];        // 释放Native广告对象
-     _native = nil;
-
-} 
-</code></pre>
-
-<h6 id="dmnativeaddelegate">实现DMNativeAdDelegate</h6>
-<p>您可以通过实现<code>DMNativeAdDelegate</code>中定义的方法，来跟踪广告生命周期中的各个阶段。所有这些方法也都定义在<code>DMNativeAd</code>中，如下：</p>
-<pre><code>@protocol DMNativeAdDelegate &lt;NSObject&gt;
-
-@required
-
-- (void)dmNativeAdSuccessToLoadAd:(DMNativeAdModel *)adDataModel;
-
-- (void)dmNativeAdFailToLoadAdWithError:(NSError *)error;
-
-@end
-</code></pre>
-
-<h5 id="dmnativead_1">DMNativeAd的素材说明：</h5>
-<p>关于DMNativeAd的其他选项处理需要参考在Domob后台的设置，在添加广告位--&gt;选择Native广告位之后，会出现对应的素材类型及规格,一旦创建不可修改.   </p>
-<h6></h6>
-<p>ICON:不需要|170<em>175|150</em>150|125<em>125|120</em>120|90<em>90|75</em>75</p>
-<h6></h6>
-<p>标题 :不需要|2-14字</p>
-<h6></h6>
-<p>简介 :不需要|8-16字|17-32字</p>
-<h6></h6>
-<p>详情 :不需要|33-48字|49-80字</p>
-<h6></h6>
-<p>Media (图片):不需要|150<em>150|160</em>284|200<em>200|225</em>188|240<em>180|240</em>380|284<em>160|300</em>250|300<em>300|320</em>568|360<em>270|380</em>240|400<em>400|450</em>375|480<em>360|480</em>758|568<em>320|600</em>500|600<em>600|640</em>1136|644<em>280|720</em>540|758<em>480|900</em>750|960<em>720|1136</em>640</p>
-<h6></h6>
-<p>点击按钮名称:1-4个字</p>
-<h6></h6>
-<p>星级:返回数值为[0,100],请开发者自行计算要对 应显示的星级,示例:只想展示 1-5 星,允许小数,若返回值为 25, 则 25/20 = 1.25 , 则界面显示1.25星</p>
-<h6></h6>
-<p>安装包大小:返回数值为[0,+∞),单位为Byte</p>
-<h6></h6>
-<p>下载次数:返回值为[0, +∞)</p>
 <h2 id="_8">获取示例</h2>
 <p>我们的实例工程都托管在Github上</p>
 <ul>
